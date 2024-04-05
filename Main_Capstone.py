@@ -7,7 +7,7 @@ connection = mysql.connector.connect(
     host="127.0.0.1",
     user="root",
     password="Bala@9944",
-    database="myproject"
+    database="mycapstone"
 )
 
 cursor = connection.cursor()
@@ -113,15 +113,15 @@ def ten_questions():
             """
         elif question == "Which videos have the highest number of likes, and what are their corresponding channel names?":
             query = """
-            SELECT v.video_name, c.channel_name, v.likes
+            SELECT v.video_name, c.channel_name, v.like_count
             FROM video v
             JOIN channel c ON v.playlist_id = c.channel_id
-            ORDER BY v.likes DESC
+            ORDER BY v.like_count DESC
             LIMIT 10
             """
         elif question == "What is the total number of likes and dislikes for each video, and what are their corresponding video names?":
             query = """
-            SELECT v.video_name, SUM(v.likes) AS total_likes, SUM(v.dislikes) AS total_dislikes
+            SELECT v.video_name, SUM(v.like_count) AS total_likes, SUM(v.dislike_count) AS total_dislikes
             FROM video v
             GROUP BY v.video_name
             """
